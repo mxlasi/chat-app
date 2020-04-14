@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Hello from './Hello';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         >
           Learn React
         </a>
+        <p>I can type here lololoo</p>
+        <Hello name="Laura" color="yellow"/>
       </header>
     </div>
   );
