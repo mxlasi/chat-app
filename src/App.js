@@ -1,15 +1,16 @@
 import React from 'react';
-import './App.css';
 import Chatbox from './components/Chatbox';
-import {Link} from 'react-router-dom';
 import firebase from './firebase';
+import {Button, Typography, ThemeProvider, Input, Container} from '@material-ui/core';
+import theme from './theme';
+import { Link } from 'react-router-dom';
+
 
 class App extends React.Component {
-
 constructor(props) {
-  super(props);
+   super(props);
   this.state = {
-    message: ''
+    message: '',
      };
   }
 
@@ -34,25 +35,28 @@ onSubmit = (event) => {
 }
 
 render() {
+ 
   return (
-    <div className="App">
-      <h1>Chat App</h1>
+    <ThemeProvider theme={theme}>
+    <Container className="App" class="container">
+      <Typography variant="h2">Chat App</Typography><Typography>
 
       {this.props.user &&
-      <div className="allow-chat">
+      <Container className="allow-chat">
       <Chatbox />
       
       <form className="message-form" onSubmit={this.onSubmit}>
-      <input 
+      <Input
+      fullWidth="true" 
       type="text"
       name="message"
       id="message"
       value={this.state.message}
       placeholder="Enter a message..."
       onChange={this.onChange} />
-<button>Send</button>
+<Button color="secondary" type="submit">Send</Button>
       </form>
-    </div>
+    </Container>
 }
 
 {!this.props.user &&
@@ -60,7 +64,9 @@ render() {
   <p><Link to="/login">Login</Link> or <Link to="/register">Register</Link> to start chatting!</p>
   </div>
   }
-</div>
+  </Typography>
+</Container>
+</ThemeProvider>
         ); 
     }   
 }

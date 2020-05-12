@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from '../firebase';
+import {List, ListItem, ListItemText, Container, ThemeProvider} from '@material-ui/core';
+import theme from '../theme';
 
 class Chatbox extends React.Component {
     constructor(props) {
@@ -24,28 +26,30 @@ class Chatbox extends React.Component {
                     });
                 }
             }
-       const chats = ascChats.reverse();
+       const chats = ascChats;
        this.setState({chats});
         });
     }
 
     render() {
         return(
-            <div className="chatbox">
-                <ul className="chat-list">
+            <ThemeProvider theme = {theme}>
+            <Container className="chatbox" class="container">
+                <List className="chat-list">
                     {this.state.chats.map(chat => {
                         const postDate = new Date(chat.date);
                         return(
-                            <li key={chat.id}>
-                                <em>{postDate.getDate() + '/' + (postDate.getMonth()+1)}</em>
-                                <strong>{chat.user}:</strong>
-                                {chat.message}                          
-                            </li>
+                            <ListItem key={chat.id} divider="true">
+                                <em>{postDate.getDate() + '/' + (postDate.getMonth()+1) + '   ' + (postDate.toLocaleTimeString())}</em>
+                                <ListItemText><strong>{chat.user}: </strong>
+                                {chat.message}</ListItemText>                          
+                            </ListItem>
                         )
                     })}
-                </ul>
+                </List>
 
-            </div>
+            </Container>
+            </ThemeProvider>
         );
     }
 }

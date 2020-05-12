@@ -1,7 +1,8 @@
 import React from 'react';
-import './Register.css';
 import firebase from '../firebase.js';
+import { Button, Typography, Container, Input, InputLabel, ThemeProvider} from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import theme from '../theme';
 
 class Register extends React.Component{
     constructor(props){
@@ -35,28 +36,32 @@ class Register extends React.Component{
     render(){
         const {email, username, password, error} = this.state;
         return(
-            <div className="auth-container">
-                <h1>Register</h1>
+            <ThemeProvider theme = {theme}>
+            <Typography>
+            <Container className="auth-container" class="container">
+                <Typography variant="h2">Register</Typography>
         {error && <p className="error-message">{error.message}</p>}
         <form onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input type="text" name="username" id="username" value={username} onChange={this.handleChange}></input>
-            <label htmlFor="email">Email address</label>
-            <input type="text" name="email" id="email" value={email} onChange={this.handleChange}></input>
-            <label htmlFor="password">Choose a password</label>
-            <input
+            <InputLabel htmlFor="username" shrink>Username</InputLabel>
+            <Input type="text" name="username" id="username" value={username} onChange={this.handleChange}></Input>
+            <InputLabel htmlFor="email" shrink>Email address</InputLabel>
+            <Input type="text" name="email" id="email" value={email} onChange={this.handleChange}></Input>
+            <InputLabel htmlFor="password" shrink>Choose a password</InputLabel>
+            <Input
                 type="password"
                 name="password"
                 id="password"
                 value={password}
                 onChange={this.handleChange}
-                ></input>
-                <button className="submit">Get started</button>
-                <p>Already have an account? <Link className="login-btn" to="/login">Login here</Link></p>
+                ></Input><br></br>
+                <Button color="secondary" type="submit">Get started</Button>
+                <p>Already have an account? <Link to="/login">Login here</Link></p>
                 </form>
 
 
-        </div>
+        </Container>
+        </Typography>
+        </ThemeProvider>
         );
     }
 }

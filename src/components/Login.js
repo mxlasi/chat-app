@@ -1,7 +1,8 @@
 import React from 'react';
-import './Login.css';
 import firebase from '../firebase.js';
+import {Button, Typography, Input, InputLabel, Container, ThemeProvider} from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import theme from '../theme';
 
 class Login extends React.Component{
     constructor(props){
@@ -26,28 +27,32 @@ class Login extends React.Component{
             });
   }
   render(){
+      
     const {email, password, error} = this.state;
     return(
-        <div className="auth-container">
-            <h1>Login</h1>
-    {error && <p className="error-message">{error.message}</p>}
+        <ThemeProvider theme ={theme}>
+        <Container class="container">
+            
+           <Typography variant="h2">Login</Typography>
+    <Typography>{error && <p className="error-message">{error.message}</p>}
     <form onSubmit={this.handleSubmit}>
-        <label htmlFor="email">Email address</label>
-        <input type="text" name="email" id="email" value={email} onChange={this.handleChange}></input>
-        <label htmlFor="password">Password</label>
-        <input
+        <InputLabel htmlFor="email" shrink>Email address</InputLabel>
+        <Input type="text" name="email" id="email" value={email} onChange={this.handleChange}></Input><br></br>
+        <InputLabel htmlFor="password" shrink>Password</InputLabel>
+        <Input
             type="password"
             name="password"
             id="password"
             value={password}
             onChange={this.handleChange}
-            ></input>
-            <button className="submit">Login</button>
-            <p>Don't have an account? <Link className="login-btn" to="/register">Register here</Link></p>
-            </form>
+            ></Input><br></br>
+            <Button type="submit" color="secondary">Login</Button>
+            <p>Don't have an account? <Link to="/register">Register here</Link></p>
+         </form>
+         
+         </Typography></Container></ThemeProvider>
 
-
-    </div>
+    
         );
     }
 }

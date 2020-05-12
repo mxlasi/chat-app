@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import Login from './components/Login';
 import Register from './components/Register';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import firebase, {auth, provider} from './firebase.js';
-
+import firebase, {auth } from './firebase.js';
+import { ThemeProvider } from '@material-ui/styles';
+import theme from './theme';
+import { Typography, Container, Toolbar, AppBar, Button} from '@material-ui/core';
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -29,24 +30,34 @@ class AppRouter extends React.Component {
   render() {
     return (
 <Router>
-  <div className ="app">
-      <nav className="main-nav">
+  <Typography>
+    <Container className = "app">
+  
+      <Toolbar>
   {!this.state.user &&
-        <div> 
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        </div>
+        <AppBar> 
+          <Container className ="links">
+        <Link to="/login"><Button>Login</Button></Link>
+        <Link to="/register"><Button>Register</Button></Link>
+        <Link to="/"><Button>Main</Button></Link>
+        </Container>
+        </AppBar>
   }
   {this.state.user &&
-        <a href="#!" onClick={this.logOutUser}>Log out</a>
+         <AppBar> 
+         <Container className ="links">
+       <Link href="#!" onClick={this.logOutUser}><Button>Log out</Button></Link>
+       </Container>
+       </AppBar>
   }    
-        </nav>
+        </Toolbar>
       <Switch>
         <Route path="/" exact render={() => <App user={this.state.user}/>} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
       </Switch>
-  </div>
+  </Container>
+  </Typography>
 </Router>
 
     );
@@ -54,7 +65,9 @@ class AppRouter extends React.Component {
 }
 
 ReactDOM.render(
- <AppRouter />,
+  <ThemeProvider theme = {theme}>
+ <AppRouter />
+ </ThemeProvider>,
   document.getElementById('root')
 );
 
