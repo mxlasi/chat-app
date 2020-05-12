@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from '../firebase';
 import {List, ListItem, ListItemText, Container, ThemeProvider} from '@material-ui/core';
 import theme from '../theme';
+import './Chatbox.css';
 
 class Chatbox extends React.Component {
     constructor(props) {
@@ -39,9 +40,9 @@ class Chatbox extends React.Component {
                     {this.state.chats.map(chat => {
                         const postDate = new Date(chat.date);
                         return(
-                            <ListItem key={chat.id} divider="true">
+                            <ListItem key={chat.id} divider="true" >
                                 <em>{postDate.getDate() + '/' + (postDate.getMonth()+1) + '   ' + (postDate.toLocaleTimeString())}</em>
-                                <ListItemText><strong>{chat.user}: </strong>
+                                <ListItemText className="user-name"><strong>{chat.user}: </strong>
                                 {chat.message}</ListItemText>                          
                             </ListItem>
                         )
