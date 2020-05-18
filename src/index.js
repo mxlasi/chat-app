@@ -9,6 +9,7 @@ import firebase, {auth } from './firebase.js';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
 import { Typography, Container, Toolbar, AppBar, Button} from '@material-ui/core';
+import './index.css';
 
 class AppRouter extends React.Component {
   constructor(props) {

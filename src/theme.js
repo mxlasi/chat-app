@@ -1,10 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { pink, lightBlue } from '@material-ui/core/colors';
-
+import pink from '@material-ui/core/colors/pink';
 
 
 const theme = createMuiTheme({
   props: {
+    
       MuiTypography: {
         variantMapping: {
           h1: 'h2',
@@ -22,11 +22,8 @@ const theme = createMuiTheme({
     },
   palette: {
     primary: pink,
-    secondary: lightBlue,
   },
-  status: {
-    danger: 'orange',
-  },
+
 });
 
 export default theme;

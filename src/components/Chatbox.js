@@ -41,7 +41,7 @@ class Chatbox extends React.Component {
                         const postDate = new Date(chat.date);
                         return(
                             <ListItem key={chat.id} divider="true" >
-                                <em>{postDate.getDate() + '/' + (postDate.getMonth()+1) + '   ' + (postDate.toLocaleTimeString())}</em>
+                                <em class="small">{postDate.getDate() + '/' + (postDate.getMonth()+1) + '   ' + (postDate.toLocaleTimeString())}</em>
                                 <ListItemText className="user-name"><strong>{chat.user}: </strong>
                                 {chat.message}</ListItemText>                          
                             </ListItem>
